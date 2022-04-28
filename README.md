@@ -14,8 +14,17 @@
 
 ## 配置数据库
 
-1. 打开 `common/configs/typeorm.config.ts`
-2. 根据本地环境配置 `databaseConfig` 的数据库信息
+1. 根目录下创建 `.env.local` 配置文件
+2. 参照以下配置文件内容，替换 `.env.local` 配置文件内容
+3. 根据本地数据库信息配置数据库
+
+```txt
+MYSQL_HOST=
+MYSQL_PORT=
+MYSQL_USER=
+MYSQL_PASSWORD=
+MYSQL_DATABASE=
+```
 
 ## 启动项目
 
