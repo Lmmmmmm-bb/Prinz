@@ -1,17 +1,22 @@
 import { ConnectionOptions } from 'typeorm';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-const databaseConfig: ConnectionOptions = {
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: '123456',
-  database: 'putovanja',
-};
+export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
+  const { MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } =
+    process.env;
 
-export const typeOrmConfig: TypeOrmModuleOptions = {
-  ...databaseConfig,
-  synchronize: true,
-  autoLoadEntities: true,
+  const databaseConfig: ConnectionOptions = {
+    type: 'mysql',
+    host: MYSQL_HOST,
+    port: parseInt(MYSQL_PORT, 10),
+    username: MYSQL_USER,
+    password: MYSQL_PASSWORD,
+    database: MYSQL_DATABASE,
+  };
+
+  return {
+    ...databaseConfig,
+    synchronize: true,
+    autoLoadEntities: true,
+  };
 };
