@@ -8,6 +8,7 @@ import { configModuleOptions } from 'src/configs/config.config';
 import { HelloModule } from 'src/modules/hello/hello.module';
 import { UserModule } from 'src/modules/user/user.module';
 import { TodoModule } from 'src/modules/todo/todo.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TodoModule } from 'src/modules/todo/todo.module';
     UserModule,
     TodoModule,
     HelloModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
