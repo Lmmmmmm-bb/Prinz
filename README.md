@@ -12,7 +12,7 @@
 <a href="mailto:lmmmmmm12138@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-Google-%23d95040"></a>
 </p>
 
-## 配置数据库
+## 配置数据库 & OAuth
 
 1. 根目录下创建 `.env.local` 配置文件
 2. 参照以下配置文件内容，替换 `.env.local` 配置文件内容
@@ -24,6 +24,9 @@ MYSQL_PORT=
 MYSQL_USER=
 MYSQL_PASSWORD=
 MYSQL_DATABASE=
+
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
 ```
 
 ## 启动项目
