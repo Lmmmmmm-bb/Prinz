@@ -9,7 +9,7 @@ export class AuthController {
 
   @ApiOperation({ summary: '获取用户信息' })
   @Get('github')
-  findAll(@Query('code') code: string) {
-    return this.authService.getGitHubAccessToken(code);
+  async findAll(@Query('code') code: string) {
+    return this.authService.signGithubJwt(code);
   }
 }
