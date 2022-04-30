@@ -10,18 +10,18 @@ import { User } from '../../user/entities/user.entity';
 @Entity({ name: 'user_todo' })
 export class Todo {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
-  @ManyToOne(() => User, (user) => user.id)
-  @JoinColumn({ name: 'user_id' })
-  userId: string;
+  @ManyToOne(() => User, { onDelete: 'CASCADE', nullable: false })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  userId: number;
 
-  @Column()
+  @Column({ nullable: false })
   date: Date;
 
-  @Column()
+  @Column({ nullable: false })
   content: string;
 
-  @Column({ name: 'is_complete' })
+  @Column({ name: 'is_complete', default: false })
   isComplete: boolean;
 }

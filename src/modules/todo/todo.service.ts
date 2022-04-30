@@ -14,12 +14,12 @@ export class TodoService {
 
   findTodoAllByUserId(userId: string) {
     this.logger.log(`[findTodoAllByUserId] userId: ${userId}`);
-    return this.todoRepository.find({ userId });
+    return this.todoRepository.find({ userId: +userId });
   }
 
   createTodo(id: string, todo: CreateTodoDto) {
     this.logger.log(`[createTodo] id: ${id}, todo: ${JSON.stringify(todo)}`);
-    return this.todoRepository.save({ ...todo, userId: id });
+    return this.todoRepository.save({ ...todo, userId: +id });
   }
 
   deleteTodo(id: string) {
