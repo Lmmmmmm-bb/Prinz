@@ -8,7 +8,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { UserPipe } from 'src/common/pipes/user.pipe';
@@ -16,6 +16,7 @@ import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoService } from './todo.service';
 
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 @ApiTags('User Todo')
 @Controller('user-todo')
