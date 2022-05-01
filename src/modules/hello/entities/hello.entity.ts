@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Hello {
   @ApiProperty({
-    description: 'This is Hello UUID',
+    description: 'This is Hello',
     required: true,
   })
   @PrimaryGeneratedColumn('uuid')

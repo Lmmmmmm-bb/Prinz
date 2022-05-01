@@ -6,22 +6,23 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
+import { IdentityTypeEnum } from '../auth.type';
 
-@Entity({ name: 'user_todo' })
-export class Todo {
+@Entity({ name: 'user_auth' })
+export class UserAuth {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @ManyToOne(() => User, { onDelete: 'CASCADE', nullable: false })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   userId: number;
 
-  @Column({ nullable: false })
-  date: Date;
+  @Column({ name: 'identity_type' })
+  identityType: IdentityTypeEnum;
 
-  @Column({ nullable: false })
-  content: string;
+  @Column()
+  identifier: string;
 
-  @Column({ name: 'is_complete', default: false })
-  isComplete: boolean;
+  @Column()
+  credential: string;
 }
