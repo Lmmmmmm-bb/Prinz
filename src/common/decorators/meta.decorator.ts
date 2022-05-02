@@ -1,9 +1,7 @@
 import { applyDecorators, SetMetadata } from '@nestjs/common';
-import { IBaseResponse } from '../models/response.model';
+import { PureResponseType } from '../models/response.model';
 
-type MetadataType = Omit<IBaseResponse, 'data'>;
-
-export const Meta = (metadata: MetadataType) => {
+export const Meta = (metadata: PureResponseType) => {
   const { status, message } = metadata;
 
   return applyDecorators(
