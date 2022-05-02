@@ -5,6 +5,7 @@ import axios from 'axios';
 import * as qs from 'qs';
 import { Repository } from 'typeorm';
 import { getGitHubOAuthConfig } from '../../configs/auth.config';
+import { User } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 import { GitHubOAuthUrl, GitHubUserInfoUrl } from './auth.config';
 import { UserAuth } from './entities/user-auth.entity';
@@ -69,7 +70,7 @@ export class AuthService {
     return this.jwtService.sign(user);
   }
 
-  transform(token: string) {
+  transform(token: string): User {
     try {
       return this.jwtService.verify(token);
     } catch {
