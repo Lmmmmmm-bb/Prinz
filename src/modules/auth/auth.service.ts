@@ -8,6 +8,8 @@ import { getGitHubOAuthConfig } from '../../configs/auth.config';
 import { User } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 import { GitHubOAuthUrl, GitHubUserInfoUrl } from './auth.config';
+import { IdentityTypeEnum } from './auth.type';
+import { CreateAuthUserDto } from './dto/create-auth-user.dto';
 import { UserAuth } from './entities/user-auth.entity';
 
 @Injectable()
@@ -33,6 +35,7 @@ export class AuthService {
         },
       },
     );
+
     const { access_token: accessToken, token_type: tokenType } =
       qs.parse(oAuthData);
 
@@ -54,8 +57,11 @@ export class AuthService {
       bio: signature,
     } = await this.getGithubAccessToken(code);
 
-    let user;
-    const userRelate = await this.userAuthRepository.findOne(id);
+    let user: User;
+    const userRelate = await this.userAuthRepository.findOne({
+      identifier: id,
+    });
+
     if (!userRelate) {
       user = await this.userService.create({
         nickname,
@@ -63,11 +69,17 @@ export class AuthService {
         area,
         signature,
       });
+      await this.create({
+        userId: user.id,
+        identifier: id,
+        credential: code,
+        identityType: IdentityTypeEnum.GitHub,
+      });
     } else {
       user = await this.userService.findUserById(userRelate.userId);
     }
 
-    return this.jwtService.sign(user);
+    return this.jwtService.sign({ ...user });
   }
 
   transform(token: string): User {
@@ -76,5 +88,9 @@ export class AuthService {
     } catch {
       throw new UnauthorizedException();
     }
+  }
+
+  create(createAuthUserDto: CreateAuthUserDto) {
+    return this.userAuthRepository.save(createAuthUserDto);
   }
 }

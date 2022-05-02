@@ -6,19 +6,18 @@ import {
   Param,
   Patch,
   Post,
-  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/common/decorators/auth.decorator';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { BaseSecurity } from 'src/common/decorators/base-security.decorator';
 import { UserPipe } from 'src/common/pipes/user.pipe';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoService } from './todo.service';
 
-@ApiBearerAuth()
-@UseGuards(AuthGuard)
 @ApiTags('User Todo')
+@ApiBearerAuth()
+@BaseSecurity()
 @Controller('user-todo')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
