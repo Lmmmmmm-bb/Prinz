@@ -3,6 +3,7 @@ import {
   ExecutionContext,
   Inject,
   Injectable,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from 'src/modules/auth/auth.service';
 import { parseToken } from '../utils/jwt.util';
@@ -19,7 +20,7 @@ export class AuthGuard implements CanActivate {
       const token = parseToken(authorization);
       this.authService.transform(token);
     } catch {
-      return false;
+      throw new UnauthorizedException();
     }
 
     return true;
