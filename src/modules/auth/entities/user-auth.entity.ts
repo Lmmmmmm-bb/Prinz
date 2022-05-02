@@ -17,12 +17,12 @@ export class UserAuth {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   userId: number;
 
-  @Column({ name: 'identity_type' })
+  @Column({ name: 'identity_type', nullable: false })
   identityType: IdentityTypeEnum;
 
-  @Column()
+  @Column({ nullable: false })
   identifier: string;
 
-  @Column()
+  @Column({ nullable: false })
   credential: string;
 }
