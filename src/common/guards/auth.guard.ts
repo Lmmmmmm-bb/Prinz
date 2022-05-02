@@ -1,11 +1,12 @@
 import {
   CanActivate,
   ExecutionContext,
+  HttpStatus,
   Inject,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from 'src/modules/auth/auth.service';
+import { ErrorException } from '../exceptions/error.exception';
 import { parseToken } from '../utils/jwt.util';
 
 @Injectable()
@@ -20,7 +21,13 @@ export class AuthGuard implements CanActivate {
       const token = parseToken(authorization);
       this.authService.transform(token);
     } catch {
-      throw new UnauthorizedException();
+      throw new ErrorException(
+        {
+          status: 401,
+          message: '没有权限',
+        },
+        HttpStatus.UNAUTHORIZED,
+      );
     }
 
     return true;
