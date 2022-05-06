@@ -35,6 +35,6 @@ JWT_SECRET=
 
 ```shell
 # 开发调试
-> pnpm install # 安装依赖
+> pnpm install --shamefully-hoist # 安装依赖
 > pnpm start # 启动开发服务器
 ```
